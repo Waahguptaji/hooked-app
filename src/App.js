@@ -12,55 +12,58 @@ function App() {
   //using context api, so we need not to prop drilling
   const [{ token }, dispatch] = useStateValue(); //dispatch is like a gun we shoot it to data layer in order to change and update data values to use that
 
-  useEffect(() => {
-    const hash = getTokenFromResponse(); //Here we getting the all tokken format.
-    window.location.hash = ""; //We donot want to show our token for security reason so we will show empty.
-    const _token = hash.access_token; //here we getting the token from the hash
+  useEffect(
+    () => {
+      const hash = getTokenFromResponse(); //Here we getting the all tokken format.
+      window.location.hash = ""; //We donot want to show our token for security reason so we will show empty.
+      const _token = hash.access_token; //here we getting the token from the hash
 
-    if (_token) {
-      spotify.setAccessToken(_token); //here we are passing our token to spotify, so we can communicate back and forth between spotify and our react app.
+      if (_token) {
+        spotify.setAccessToken(_token); //here we are passing our token to spotify, so we can communicate back and forth between spotify and our react app.
 
-      dispatch({
-        type: "SET_TOKEN",
-        token: _token,
-      });
+        dispatch({
+          type: "SET_TOKEN",
+          token: _token,
+        });
 
-      spotify.getMe().then((user) => {
+        spotify.getMe().then((user) => {
+          dispatch({
+            //Here we shoot it to context
+            type: "SET_USER",
+            user: user,
+          });
+        });
+
+        spotify.getPlaylist("37i9dQZEVXcJHDZYl7Cri7").then((response) =>
+          dispatch({
+            type: "SET_DISCOVER_WEEKLY",
+            discover_weekly: response,
+          })
+        );
+
+        spotify.getMyTopArtists().then((response) =>
+          dispatch({
+            type: "SET_TOP_ARTISTS",
+            top_artists: response,
+          })
+        );
+
+        dispatch({
+          type: "SET_SPOTIFY",
+          spotify: spotify,
+        });
+      }
+
+      spotify.getUserPlaylists().then((playlists) => {
         dispatch({
           //Here we shoot it to context
-          type: "SET_USER",
-          user: user,
+          type: "SET_PLAYLISTS",
+          playlists: playlists,
         });
       });
-
-      spotify.getPlaylist("37i9dQZEVXcJHDZYl7Cri7").then((response) =>
-        dispatch({
-          type: "SET_DISCOVER_WEEKLY",
-          discover_weekly: response,
-        })
-      );
-
-      spotify.getMyTopArtists().then((response) =>
-        dispatch({
-          type: "SET_TOP_ARTISTS",
-          top_artists: response,
-        })
-      );
-
-      dispatch({
-        type: "SET_SPOTIFY",
-        spotify: spotify,
-      });
-    }
-
-    spotify.getUserPlaylists().then((playlists) => {
-      dispatch({
-        //Here we shoot it to context
-        type: "SET_PLAYLISTS",
-        playlists: playlists,
-      });
-    });
-  }, [token, dispatch]); // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [token, dispatch]
+  );
 
   return (
     <div className="App">

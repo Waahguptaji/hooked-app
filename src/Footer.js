@@ -14,20 +14,22 @@ import { Grid, Slider } from "@mui/material";
 function Footer({ spotify }) {
   const [{ token, item, playing }, dispatch] = useStateValue();
 
-  useEffect(() => {
-    spotify.getMyCurrentPlaybackState().then((song) => {
-      dispatch({
-        type: "SET_PLAYING",
-        playing: song.is_playing,
-      });
+  useEffect(
+    () => {
+      spotify.getMyCurrentPlaybackState().then((song) => {
+        dispatch({
+          type: "SET_PLAYING",
+          playing: song.is_playing,
+        });
 
-      dispatch({
-        type: "SET_ITEM",
-        item: song.item,
+        dispatch({
+          type: "SET_ITEM",
+          item: song.item,
+        });
       });
-    });
-  }, [spotify]); // eslint-disable-next-line react-hooks/exhaustive-deps
-
+    }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    [spotify]
+  );
   const handlePlayPause = () => {
     if (playing) {
       spotify.pause();
