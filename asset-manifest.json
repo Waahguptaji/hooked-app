@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/hooked-app/static/css/main.545d20c7.css",
-    "main.js": "/hooked-app/static/js/main.0fc07b2c.js",
+    "main.js": "/hooked-app/static/js/main.616f1c8a.js",
     "static/js/787.33ee3926.chunk.js": "/hooked-app/static/js/787.33ee3926.chunk.js",
     "index.html": "/hooked-app/index.html",
     "main.545d20c7.css.map": "/hooked-app/static/css/main.545d20c7.css.map",
-    "main.0fc07b2c.js.map": "/hooked-app/static/js/main.0fc07b2c.js.map",
+    "main.616f1c8a.js.map": "/hooked-app/static/js/main.616f1c8a.js.map",
     "787.33ee3926.chunk.js.map": "/hooked-app/static/js/787.33ee3926.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.545d20c7.css",
-    "static/js/main.0fc07b2c.js"
+    "static/js/main.616f1c8a.js"
   ]
 }
