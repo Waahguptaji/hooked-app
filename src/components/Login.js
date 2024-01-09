@@ -23,7 +23,7 @@ const Login = () => {
 
   return (
     <Container>
-      <img src="../images/logo.png" alt="" />
+      <img src="images/logo.png" alt="" />
       <button onClick={handleClick}>Login With Spotify</button>
     </Container>
   );
