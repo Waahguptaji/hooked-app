@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Login = () => {
   const handleClick = () => {
     const clientId = "ee4bdd40020c4f56a73dd75a4be6ec04";
-    const redirectUri = "http://localhost:3000/";
+    const redirectUri = "https://hooked.vercel.app/";
     const apiUrl = "https://accounts.spotify.com/authorize";
     const scopes = [
       "user-read-email",
